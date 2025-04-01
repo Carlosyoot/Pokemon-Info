@@ -1,0 +1,101 @@
+@use '../../../config-scss/rem-calc.scss' as rem;
+
+$padding: rem.rem-calc(20);
+$gap: rem.rem-calc(15); // Espaço entre os itens
+
+:host {
+  width: 100%;
+  padding: 0 $padding;
+
+  .listagem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $gap;
+    padding: $padding 0;
+
+    .pokemon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--branco);
+      min-height: rem.rem-calc(157);
+      padding: $padding;
+      margin: 10px;
+      border-radius: rem.rem-calc(10);
+      text-decoration: none;
+      color: var(--primary-color);
+      box-sizing: border-box;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      }
+
+      &__status {
+        h2 {
+          font-size: rem.rem-calc(24); 
+          font-style: italic;
+          font-weight: 700;
+          text-transform: capitalize;
+          margin-bottom: rem.rem-calc(8);
+        }
+
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: rem.rem-calc(4);
+
+          li {
+            background: var(--cinza);
+            font-size: rem.rem-calc(9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: rem.rem-calc(50);
+            width: rem.rem-calc(55);
+            padding: rem.rem-calc(2) 0;
+          }
+        }
+      }
+
+      &__image {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: rem.rem-calc(80);
+        width: rem.rem-calc(120);
+        right: $padding;
+        bottom: $padding;
+        background: url('../../../assets/bg/background-list-pokemons.svg') no-repeat;
+        background-size: contain;
+
+        img {
+          width: 60%;
+          max-width: 100px;
+          min-width: 30px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .listagem {
+      grid-template-columns: 1fr; // Uma coluna em telas muito pequenas
+      
+      .pokemon {
+        min-height: rem.rem-calc(120);
+        
+        &__status h2 {
+          font-size: rem.rem-calc(16);
+        }
+        
+        &__image {
+          height: rem.rem-calc(60);
+          width: rem.rem-calc(70);
+        }
+      }
+    }
+  }
+}
